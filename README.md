@@ -112,9 +112,12 @@ From the **Completed training job** page:
 
 
 ### 5. **Data Storage**
+* **DynamoDB → Create table**
 
-* **Option A:** DynamoDB (fast NoSQL, good for dashboards).
-* **Option B:** S3 (scalable storage, QuickSight can connect easily).
+  * Name: iot_predictions
+  * Partition key: pk (String) → pattern: ${deviceId}#${yyyy-mm-dd}
+  * Sort key: ts (Number) → epoch millis
+<img width="1439" height="773" alt="11" src="https://github.com/user-attachments/assets/ed624ac1-26ad-4828-bccf-e543064ca988" />
 
 ### 6. **Visualization with QuickSight**
 
