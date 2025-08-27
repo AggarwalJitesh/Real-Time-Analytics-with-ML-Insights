@@ -32,6 +32,7 @@ Architecture Flow
 * Write a Python script (producer.py) that generates synthetic IoT data
 * Use boto3 SDK to push JSON events into **Amazon Kinesis**
 * Ran locally on Mac
+<img width="1439" height="833" alt="Screenshot 2025-08-27 at 3 11 46 PM" src="https://github.com/user-attachments/assets/d064bc24-ad66-4ba6-b5b7-beaf6d9f5279" />
 
 <img width="1439" height="773" alt="1" src="https://github.com/user-attachments/assets/d3282aba-5dba-46e5-8dd8-6ce8e5d0e17d" />
 
@@ -121,20 +122,40 @@ From the **Completed training job** page:
 
 ### 6. **Visualization with QuickSight**
 
-* Connect QuickSight to DynamoDB/S3 dataset.
-* Create real-time dashboard (line chart for time-series, scatter for anomalies, etc.).
+* Connect QuickSight to DynamoDB dataset.
+* Create real-time dashboard 
+<img width="1439" height="773" alt="17" src="https://github.com/user-attachments/assets/ba5a7eda-d265-47e1-84fc-c34e88a008b8" />
+<img width="1439" height="773" alt="17 1" src="https://github.com/user-attachments/assets/d15d06a3-7396-46a8-830e-654c7b1dd668" />
+<img width="1439" height="773" alt="17 2" src="https://github.com/user-attachments/assets/f8d6ae0c-995f-41e7-8fa0-ce17325ed31d" />
+
+
 
 ### 7. **Monitoring**
 
 * Use **CloudWatch** to:
 
-  * Monitor Kinesis stream throughput.
-  * Track Lambda execution failures/errors.
-  * Set alarms for anomalies.
+* **Kinesis metrics/alarms:**
+
+  * IncomingRecords, IncomingBytes, GetRecords.IteratorAgeMilliseconds (alarm if iterator age grows → Lambda not keeping up).
+* **Lambda metrics/alarms:**
+
+  * Errors, Throttles, Duration (p95), ConcurrentExecutions.
+* **SageMaker endpoint metrics:**
+
+  * Invocation4XXErrors, Invocation5XXErrors, ModelLatency, OverheadLatency, Invocations.
+* **Useful logs**:
+
+  * **Lambda → Monitor → View logs in CloudWatch Logs** (add debug logs around InvokeEndpoint)
+ 
+<img width="1439" height="773" alt="17 3" src="https://github.com/user-attachments/assets/fa24b1b5-21f2-40af-9b1a-dff3c7f7d341" />
+<img width="1439" height="773" alt="17 4" src="https://github.com/user-attachments/assets/7b09797b-7dc2-496e-b0b0-d01a7a8a1cc0" />
+<img width="1439" height="773" alt="17 5" src="https://github.com/user-attachments/assets/cdc802e7-ebf7-454e-9dc7-0aed69aeddb8" />
+
+
 
 ---
 
-## ⚡ Local Setup (Mac/Linux Example)
+## Local Setup (Mac)
 
 1. **Clone repo & create venv**
 
@@ -161,9 +182,4 @@ From the **Completed training job** page:
    bash
    python producer.py
    
-
----
-
----
-
 
